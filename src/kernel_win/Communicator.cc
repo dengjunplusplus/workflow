@@ -17,6 +17,7 @@
            Wu Jiaxu (wujiaxu@sogou-inc.com)
 */
 
+#include "PlatformSocket.h"
 #include <openssl/ssl.h>
 #include <Winsock2.h>
 #include <io.h>
@@ -32,7 +33,6 @@
 #include <chrono>
 #include <atomic>
 #include <vector>
-#include "PlatformSocket.h"
 #include "list.h"
 #include "thrdpool.h"
 #include "Communicator.h"

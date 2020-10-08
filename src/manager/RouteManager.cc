@@ -16,6 +16,7 @@
   Authors: Wu Jiaxu (wujiaxu@sogou-inc.com)
 */
 
+#include "PlatformSocket.h"
 #include <openssl/ssl.h>
 #include <stdint.h>
 #include <string.h>
@@ -25,7 +26,6 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-#include "PlatformSocket.h"
 #include "list.h"
 #include "rbtree.h"
 #include "WFGlobal.h"

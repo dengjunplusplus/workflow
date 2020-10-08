@@ -16,12 +16,12 @@
   Authors: Wu Jiaxu (wujiaxu@sogou-inc.com)
 */
 
+#include "PlatformSocket.h"
 #include <openssl/sha.h>
 #include <stdint.h>
 #include <string.h>
 #include <errno.h>
 #include <string>
-#include "PlatformSocket.h"
 #include "MySQLMessage.h"
 #include "mysql_types.h"
 

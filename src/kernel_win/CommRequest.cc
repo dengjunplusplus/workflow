@@ -5,7 +5,7 @@
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+	  http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,9 +14,10 @@
   limitations under the License.
 
   Authors: Xie Han (xiehan@sogou-inc.com)
-           Wu Jiaxu (wujiaxu@sogou-inc.com)
+		   Wu Jiaxu (wujiaxu@sogou-inc.com)
 */
 
+#include "PlatformSocket.h"
 #include <errno.h>
 #include "CommScheduler.h"
 #include "CommRequest.h"
@@ -38,7 +39,7 @@ void CommRequest::handle(int state, int error)
 void CommRequest::dispatch()
 {
 	if (this->scheduler->request(this, this->object, this->wait_timeout,
-								 &this->target) < 0)
+		&this->target) < 0)
 	{
 		this->state = CS_STATE_ERROR;
 		this->error = errno;
@@ -50,4 +51,3 @@ void CommRequest::dispatch()
 		this->subtask_done();
 	}
 }
-

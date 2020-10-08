@@ -17,10 +17,10 @@
            Wu Jiaxu (wujiaxu@sogou-inc.com)
 */
 
+#include "PlatformSocket.h"
 #include <stdio.h>
 #include <openssl/ssl.h>
 #include <atomic>
-#include "PlatformSocket.h"
 #include "CommScheduler.h"
 #include "WFConnection.h"
 #include "WFGlobal.h"

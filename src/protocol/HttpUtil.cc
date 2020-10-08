@@ -17,6 +17,7 @@
            Wu Jiaxu (wujiaxu@sogou-inc.com)
 */
 
+#include "PlatformSocket.h"
 #include <string>
 #include <vector>
 #include <algorithm>

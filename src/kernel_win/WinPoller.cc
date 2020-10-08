@@ -15,8 +15,7 @@
 
   Authors: Wu Jiaxu (wujiaxu@sogou-inc.com)
 */
-
-#include <Winsock2.h>
+#include "PlatformSocket.h"
 #include <Ioapiset.h>
 #include <Mswsock.h>
 #include <Synchapi.h>
@@ -25,7 +24,6 @@
 #include <atomic>
 #include <chrono>
 #include <set>
-#include "PlatformSocket.h"
 #include "WinPoller.h"
 
 #define GET_CURRENT_MS	std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()

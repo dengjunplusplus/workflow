@@ -17,10 +17,10 @@
            Wu Jiaxu (wujiaxu@sogou-inc.com)
 */
 
+#include "PlatformSocket.h"
 #include <errno.h>
 #include <stdlib.h>
 #include <chrono>
-#include "PlatformSocket.h"
 #include "CommScheduler.h"
 
 int CommSchedTarget::init(const struct sockaddr *addr, socklen_t addrlen,

@@ -16,6 +16,7 @@
   Authors: Wu Jiaxu (wujiaxu@sogou-inc.com)
 */
 
+#include "PlatformSocket.h"
 #include "WFMySQLServer.h"
 
 #ifdef _WIN32

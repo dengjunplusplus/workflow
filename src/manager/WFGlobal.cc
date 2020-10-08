@@ -16,6 +16,7 @@
   Authors: Wu Jiaxu (wujiaxu@sogou-inc.com)
 */
 
+#include "PlatformSocket.h"
 #include <openssl/ssl.h>
 #include <openssl/err.h>
 #include <openssl/engine.h>

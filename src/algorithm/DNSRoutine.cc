@@ -15,10 +15,9 @@
 
   Authors: Wu Jiaxu (wujiaxu@sogou-inc.com)
 */
-
+#include "PlatformSocket.h"
 #include <stdio.h>
 #include <string.h>
-#include "PlatformSocket.h"
 #include "DNSRoutine.h"
 
 #define PORT_STR_MAX	5

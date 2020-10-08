@@ -16,6 +16,7 @@
   Author: Xie Han (xiehan@sogou-inc.com)
 */
 
+#include "PlatformSocket.h"
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>

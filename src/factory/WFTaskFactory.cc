@@ -17,10 +17,10 @@
            Xie Han (xiehan@sogou-inc.com)
 */
 
+#include "PlatformSocket.h"
 #include <ctype.h>
 #include <string>
 #include <mutex>
-#include "PlatformSocket.h"
 #include "list.h"
 #include "rbtree.h"
 #include "DNSRoutine.h"

@@ -16,6 +16,7 @@
   Author: Xie Han (xiehan@sogou-inc.com;63350856@qq.com)
 */
 
+#include "workflow/PlatformSocket.h"
 #include <signal.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -68,8 +69,8 @@ void wget_callback(WFHttpTask *task)
 
 	/* Print request. */
 	fprintf(stderr, "%s %s %s\r\n", req->get_method(),
-									req->get_http_version(),
-									req->get_request_uri());
+		req->get_http_version(),
+		req->get_request_uri());
 
 	protocol::HttpHeaderCursor req_cursor(req);
 
@@ -79,8 +80,8 @@ void wget_callback(WFHttpTask *task)
 
 	/* Print response header. */
 	fprintf(stderr, "%s %s %s\r\n", resp->get_http_version(),
-									resp->get_status_code(),
-									resp->get_reason_phrase());
+		resp->get_status_code(),
+		resp->get_reason_phrase());
 
 	protocol::HttpHeaderCursor resp_cursor(resp);
 
@@ -121,7 +122,7 @@ int main(int argc, char *argv[])
 	}
 
 	task = WFTaskFactory::create_http_task(url, REDIRECT_MAX, RETRY_MAX,
-										   wget_callback);
+		wget_callback);
 	protocol::HttpRequest *req = task->get_req();
 	req->add_header_pair("Accept", "*/*");
 	req->add_header_pair("User-Agent", "Wget/1.14 (linux-gnu)");
@@ -134,4 +135,3 @@ int main(int argc, char *argv[])
 #endif
 	return 0;
 }
-

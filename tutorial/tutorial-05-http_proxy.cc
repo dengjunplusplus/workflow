@@ -5,7 +5,7 @@
   you may not use this file except in compliance with the License.
   You may obtain a copy of the License at
 
-      http://www.apache.org/licenses/LICENSE-2.0
+	  http://www.apache.org/licenses/LICENSE-2.0
 
   Unless required by applicable law or agreed to in writing, software
   distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,7 @@
   Author: Xie Han (xiehan@sogou-inc.com;63350856@qq.com)
 */
 
+#include "workflow/PlatformSocket.h"
 #include <signal.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -46,10 +47,10 @@ void reply_callback(WFHttpTask *proxy_task)
 
 	if (proxy_task->get_state() == WFT_STATE_SUCCESS)
 		fprintf(stderr, "%s: Success. Http Status: %s, BodyLength: %zu\n",
-				context->url.c_str(), proxy_resp->get_status_code(), size);
+			context->url.c_str(), proxy_resp->get_status_code(), size);
 	else /* WFT_STATE_SYS_ERROR*/
 		fprintf(stderr, "%s: Reply failed: %s, BodyLength: %zu\n",
-				context->url.c_str(), strerror(proxy_task->get_error()), size);
+			context->url.c_str(), strerror(proxy_task->get_error()), size);
 }
 
 void http_callback(WFHttpTask *task)
@@ -96,13 +97,13 @@ void http_callback(WFHttpTask *task)
 			err_string = "URL error (Cannot be a HTTPS proxy)";
 
 		fprintf(stderr, "%s: Fetch failed. state = %d, error = %d: %s\n",
-				context->url.c_str(), state, task->get_error(),
-				err_string);
+			context->url.c_str(), state, task->get_error(),
+			err_string);
 
 		/* As a tutorial, make it simple. And ignore reply status. */
 		proxy_resp->set_status_code("404");
 		proxy_resp->append_output_body_nocopy(
-							"<html>404 Not Found.</html>", 27);
+			"<html>404 Not Found.</html>", 27);
 	}
 }
 
@@ -119,11 +120,11 @@ void process(WFHttpTask *proxy_task)
 	series->set_context(context);
 	series->set_callback([](const SeriesWork *series) {
 		delete (tutorial_series_context *)series->get_context();
-	});
+		});
 
 	context->is_keep_alive = req->is_keep_alive();
 	http_task = WFTaskFactory::create_http_task(req->get_request_uri(), 0, 0,
-												http_callback);
+		http_callback);
 
 	const void *body;
 	size_t len;
@@ -178,4 +179,3 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
-

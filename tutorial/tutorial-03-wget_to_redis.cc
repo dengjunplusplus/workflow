@@ -17,6 +17,7 @@
 */
 
 /* Tuturial-03. Store wget result in redis: key=URL, value=Http Body*/
+#include "workflow/PlatformSocket.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -55,7 +56,7 @@ void redis_callback(WFRedisTask *task)
 		if (!value.is_error())
 		{
 			fprintf(stderr, "redis SET success: key: %s, value size: %zu\n",
-							context->http_url.c_str(), context->body_len);
+				context->http_url.c_str(), context->body_len);
 			context->success = true;
 		}
 		else
@@ -64,7 +65,7 @@ void redis_callback(WFRedisTask *task)
 	else
 	{
 		fprintf(stderr, "redis SET error: state = %d, error = %d\n",
-				state, task->get_error());
+			state, task->get_error());
 	}
 }
 
@@ -77,7 +78,7 @@ void http_callback(WFHttpTask *task)
 	if (state != WFT_STATE_SUCCESS)
 	{
 		fprintf(stderr, "http task error: state = %d, error = %d\n",
-						state, error);
+			state, error);
 		return;
 	}
 
@@ -99,7 +100,7 @@ void http_callback(WFHttpTask *task)
 
 	WFRedisTask *redis_task =
 		WFTaskFactory::create_redis_task(context->redis_url, RETRY_MAX,
-										 redis_callback);
+			redis_callback);
 
 	std::string value((char *)body, body_len);
 	redis_task->get_req()->set_request("SET", { context->http_url, value });
@@ -137,8 +138,8 @@ int main(int argc, char *argv[])
 	}
 
 	http_task = WFTaskFactory::create_http_task(context.http_url,
-												REDIRECT_MAX, RETRY_MAX,
-												http_callback);
+		REDIRECT_MAX, RETRY_MAX,
+		http_callback);
 	HttpRequest *req = http_task->get_req();
 	req->add_header_pair("Accept", "*/*");
 	req->add_header_pair("User-Agent", "Wget/1.14 (linux-gnu)");
@@ -153,7 +154,7 @@ int main(int argc, char *argv[])
 	auto series_callback = [&mutex, &cond, &finished](const SeriesWork *series)
 	{
 		tutorial_series_context *context = (tutorial_series_context *)
-											series->get_context();
+			series->get_context();
 
 		if (context->success)
 			fprintf(stderr, "Series finished. all success!\n");
@@ -169,7 +170,7 @@ int main(int argc, char *argv[])
 
 	/* Create a series */
 	SeriesWork *series = Workflow::create_series_work(http_task,
-													  series_callback);
+		series_callback);
 	series->set_context(&context);
 	series->start();
 
@@ -179,4 +180,3 @@ int main(int argc, char *argv[])
 	lock.unlock();
 	return 0;
 }
-

@@ -16,6 +16,7 @@
   Author: Xie Han (xiehan@sogou-inc.com;63350856@qq.com)
 */
 
+#include <workflow/PlatformSocket.h>
 #include <signal.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -44,7 +45,7 @@ void process(WFHttpTask *server_task)
 	/* Set response message body. */
 	resp->append_output_body_nocopy("<html>", 6);
 	len = snprintf(buf, 8192, "<p>%s %s %s</p>", req->get_method(),
-				   req->get_request_uri(), req->get_http_version());
+		req->get_request_uri(), req->get_http_version());
 	resp->append_output_body(buf, len);
 
 	while (cursor.next(name, value))
@@ -88,7 +89,7 @@ void process(WFHttpTask *server_task)
 		strcpy(addrstr, "Unknown");
 
 	fprintf(stderr, "Peer address: %s:%d, seq: %lld.\n",
-			addrstr, port, seq);
+		addrstr, port, seq);
 }
 
 void sig_handler(int signo) { }
@@ -115,7 +116,7 @@ int main(int argc, char *argv[])
 		getchar();
 #endif
 		server.stop();
-	}
+}
 	else
 	{
 		perror("Cannot start server");
@@ -124,4 +125,3 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
-

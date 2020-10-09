@@ -16,6 +16,7 @@
   Author: Xie Han (xiehan@sogou-inc.com;63350856@qq.com)
 */
 
+#include "workflow/PlatformSocket.h"
 #include <signal.h>
 #include <stdlib.h>
 #include <stdio.h>
@@ -62,8 +63,8 @@ void redis_callback(WFRedisTask *task)
 		resp->get_result(val);
 		if (val.is_error())
 		{
-		   fprintf(stderr, "Error reply. Need a password?\n");
-		   state = WFT_STATE_TASK_ERROR;
+			fprintf(stderr, "Error reply. Need a password?\n");
+			state = WFT_STATE_TASK_ERROR;
 		}
 		break;
 	}
@@ -80,8 +81,8 @@ void redis_callback(WFRedisTask *task)
 	{
 		tutorial_task_data *data = (tutorial_task_data *)task->user_data;
 		WFRedisTask *next = WFTaskFactory::create_redis_task(data->url,
-															 RETRY_MAX,
-															 redis_callback);
+			RETRY_MAX,
+			redis_callback);
 
 		next->get_req()->set_request("GET", { data->key });
 		/* Push next task(GET task) to current series. */
@@ -93,7 +94,7 @@ void redis_callback(WFRedisTask *task)
 		if (val.is_string())
 		{
 			fprintf(stderr, "Redis GET success. value = %s\n",
-					val.string_value().c_str());
+				val.string_value().c_str());
 		}
 		else
 		{
@@ -136,7 +137,7 @@ int main(int argc, char *argv[])
 	data.key = argv[2];
 
 	task = WFTaskFactory::create_redis_task(data.url, RETRY_MAX,
-											redis_callback);
+		redis_callback);
 	protocol::RedisRequest *req = task->get_req();
 	req->set_request("SET", { data.key, argv[3] });
 
@@ -154,4 +155,3 @@ int main(int argc, char *argv[])
 #endif
 	return 0;
 }
-

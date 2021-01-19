@@ -57,9 +57,11 @@ cmake -B [build directory] -S .
  cmake -B [build directory] -S . -DCMAKE_TOOLCHAIN_FILE=[vcpkg.cmake directory]
 ```
 
-[openssl directory] : openssl目录，请自行替换
-[build directory] : 构建目录，一般使用build目录
-[vcpkg.cmake directory] : 一般为vcpkg根目录\scripts\buildsystems\vcpkg.cmake
+**[openssl directory]**: openssl目录，请自行替换
+
+**[build directory]** : 构建目录，一般使用build目录
+
+**[vcpkg.cmake directory]** : 一般为vcpkg根目录\scripts\buildsystems\vcpkg.cmake
 
 执行完成后，在[build directory]下会生成workflow.sln，可以用VS打开进行编译，或执行cmake命令进行编译
 
